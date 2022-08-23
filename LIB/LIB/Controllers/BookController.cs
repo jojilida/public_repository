@@ -11,9 +11,7 @@ namespace LIB.Controllers
 
         [HttpPost]
         public bool INSERTBOOK(String rate, String bookname, String isbn, String book_damage)
-        {
-     
-      
+        {    
             Random rad = new Random();
             int id = rad.Next(10, 1000000);
             string sqlstr = "select BOOK_ID from MY_BOOKS where BOOK_ID=" + id;
