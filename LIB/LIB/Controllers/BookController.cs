@@ -27,9 +27,10 @@ namespace LIB.Controllers
                 //string book_damage = "1234567";
                 var strinsertinto = "insert into MY_BOOKS (BOOK_NAME,ISBN,BOOK_ID,RATE,BORROWED_TIMES,STATE,BOOK_DAMAGE) values (:bookname,:isbn,:id,:rate,:borrowed_times,:state,:book_damage)";
                 List<OracleParameter> oracleParameters = new List<OracleParameter>();
-                oracleParameters.Add(new OracleParameter(":id", bookid));
+                
                 oracleParameters.Add(new OracleParameter(":bookname", bookname));
                 oracleParameters.Add(new OracleParameter(":isbn", isbn));
+                oracleParameters.Add(new OracleParameter(":id", bookid));
                 oracleParameters.Add(new OracleParameter(":rate", rate));
                 oracleParameters.Add(new OracleParameter(":borrowed_times", borrowed_times));
                 oracleParameters.Add(new OracleParameter(":state", state));
@@ -39,6 +40,22 @@ namespace LIB.Controllers
             }
 
             return false;
+        }
+        [HttpPost]
+        public string updaterate(String rate,String bookname)
+        {
+            if (String.IsNullOrEmpty(rate))
+            {
+                return "false";
+            }
+            var strinsertinto = "update MY_BOOKS set RATE=:rate where BOOK_NAME=:bookname";
+            List<OracleParameter> oracleParameters = new List<OracleParameter>();
+            oracleParameters.Add(new OracleParameter(":rate", rate));
+            oracleParameters.Add(new OracleParameter(":bookname", bookname));
+            var isok = DbHelperOra.ExecuteSql(strinsertinto, oracleParameters.ToArray());
+            Console.WriteLine(isok);
+
+            return rate;
         }
 
         [HttpPost]

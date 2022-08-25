@@ -59,19 +59,19 @@ namespace LIB.Controllers
         }
 
         [HttpPost]
-        public bool register(String username, String password, String mail)
+        public String register(String username, String password, String mail)
         {
             if (String.IsNullOrEmpty(username))
             {
-                return false;
+                return "false";
             }
             if (String.IsNullOrEmpty(password))
             {
-                return false;
+                return "false";
             }
             if (String.IsNullOrEmpty(mail))
             {
-                return false;
+                return "false";
             }
             Random rad = new Random();
             int id = rad.Next(10, 1000000);
@@ -89,7 +89,7 @@ namespace LIB.Controllers
             oracleParameters.Add(new OracleParameter(":nickname", nickname));
             oracleParameters.Add(new OracleParameter(":mail", mail));
             DbHelperOra.ExecuteSql(strinsertinto, oracleParameters.ToArray());
-            return true;
+            return userid;
         }
         [HttpPost]
         public ActionResult Loginwithusernameandpassword(String username, String password)
@@ -310,6 +310,17 @@ namespace LIB.Controllers
             }
             return result;
         }
-
+        [HttpGet]
+        public string get_detailed_info()
+        {
+            string result = "";
+            var datatable = DbHelperOra.Query("select * from MY_USER");
+            foreach (DataRow item in datatable.Tables[0].Rows)
+            {
+                Console.WriteLine(item["USER_NAME"].ToString() + "___" + item["USER_ID"].ToString());
+                result += item["USER_NAME"].ToString() + "___" + item["USER_ID"].ToString() + ",";
+            }
+            return result;
+        }
     }
 }
