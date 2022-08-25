@@ -311,14 +311,17 @@ namespace LIB.Controllers
             return result;
         }
         [HttpGet]
-        public string get_detailed_info()
+        public string get_detailed_info(string userid)
         {
             string result = "";
-            var datatable = DbHelperOra.Query("select * from MY_USER");
+            var datatable = DbHelperOra.Query("select * from MY_USER where USER_ID="+userid);
             foreach (DataRow item in datatable.Tables[0].Rows)
             {
-                Console.WriteLine(item["USER_NAME"].ToString() + "___" + item["USER_ID"].ToString());
-                result += item["USER_NAME"].ToString() + "___" + item["USER_ID"].ToString() + ",";
+                result += item["USER_NAME"].ToString() + "," + item["USER_ID"].ToString() + "," + item["AGE"].ToString() + "," + item["SEX"].ToString() + "," + item["NICK_NAME"].ToString() + "," + item["USER_MAIL"].ToString() + ",";
+                var data2 = DbHelperOra.ExecuteSql("select * from MY_LOAN_BOOKS where LOAN_PEOPLE=" + userid);
+                result += data2.ToString()+",";
+                var data3 = DbHelperOra.ExecuteSql("select * from MY_ROOM_APPOINTMENT where USER_ID=" + userid);
+                result += data3.ToString() + ";\n";
             }
             return result;
         }
