@@ -5,8 +5,10 @@ C:\Users\zhang\source\repos\LIB\LIB\obj\Release\net6.0\PubTmp\Out\LIB.dll
 C:\Users\zhang\source\repos\LIB\LIB\obj\Release\net6.0\PubTmp\Out\LIB.deps.json
 C:\Users\zhang\source\repos\LIB\LIB\obj\Release\net6.0\PubTmp\Out\LIB.runtimeconfig.json
 C:\Users\zhang\source\repos\LIB\LIB\obj\Release\net6.0\PubTmp\Out\LIB.pdb
+C:\Users\zhang\source\repos\LIB\LIB\obj\Release\net6.0\PubTmp\Out\Json.Net.dll
 C:\Users\zhang\source\repos\LIB\LIB\obj\Release\net6.0\PubTmp\Out\Microsoft.OpenApi.dll
 C:\Users\zhang\source\repos\LIB\LIB\obj\Release\net6.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
+C:\Users\zhang\source\repos\LIB\LIB\obj\Release\net6.0\PubTmp\Out\Newtonsoft.Json.dll
 C:\Users\zhang\source\repos\LIB\LIB\obj\Release\net6.0\PubTmp\Out\Oracle.ManagedDataAccess.dll
 C:\Users\zhang\source\repos\LIB\LIB\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\zhang\source\repos\LIB\LIB\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
