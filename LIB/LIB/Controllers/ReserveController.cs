@@ -40,17 +40,13 @@ namespace LIB.Controllers
             return false;
         }
 
-        //[HttpGet]
-        //public string GetMyReservation(String userid)
-        //{
-        //    string result = "";
-        //    DataSet datatable = new DataSet();
-        //    //datatable = DbHelperOra.Query("select * from MY_SEAT_APPOINTMENT where STATE=0 and USER_ID=" + userid);
-        //    datatable = DbHelperOra.Query("select * from MY_SEAT_APPOINTMENT USER_ID=" + userid);
-        //    string JsonString = string.Empty;
-        //    JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
-        //    return JsonString;
-        //}
+        [HttpGet]
+        public int GetNumber()
+        {
+            var data = DbHelperOra.Query("select * from MY_SEAT_APPOINTMENT where STATE=0");
+            int num = data.Tables[0].Rows.Count;
+            return num;
+        }
 
         [HttpPost]
         public bool EndReserve(String userid)
