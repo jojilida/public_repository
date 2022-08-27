@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\zhang\\source\\repos\\LIB\\LIB\\LIB.csproj": {}
+    "C:\\迅雷下载\\public_repository-main\\public_repository-main\\LIB\\LIB\\LIB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\zhang\\source\\repos\\LIB\\LIB\\LIB.csproj": {
+    "C:\\迅雷下载\\public_repository-main\\public_repository-main\\LIB\\LIB\\LIB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\zhang\\source\\repos\\LIB\\LIB\\LIB.csproj",
+        "projectUniqueName": "C:\\迅雷下载\\public_repository-main\\public_repository-main\\LIB\\LIB\\LIB.csproj",
         "projectName": "LIB",
-        "projectPath": "C:\\Users\\zhang\\source\\repos\\LIB\\LIB\\LIB.csproj",
+        "projectPath": "C:\\迅雷下载\\public_repository-main\\public_repository-main\\LIB\\LIB\\LIB.csproj",
         "packagesPath": "C:\\Users\\zhang\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\zhang\\source\\repos\\LIB\\LIB\\obj\\",
+        "outputPath": "C:\\迅雷下载\\public_repository-main\\public_repository-main\\LIB\\LIB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -46,14 +46,6 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Json.Net": {
-              "target": "Package",
-              "version": "[1.0.33, )"
-            },
-            "Newtonsoft.Json": {
-              "target": "Package",
-              "version": "[13.0.1, )"
-            },
             "Oracle.ManagedDataAccess.Core": {
               "target": "Package",
               "version": "[3.21.70, )"

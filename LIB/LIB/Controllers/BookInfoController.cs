@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
 
@@ -40,9 +39,20 @@ namespace LIB.Controllers
             List<OracleParameter> oracleParameters = new List<OracleParameter>();
             oracleParameters.Add(new OracleParameter(":bookname", bookname));
             var datatable = DbHelperOra.Query(sqlstr, oracleParameters.ToArray());
-            string JsonString = string.Empty;
-            JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
-            return JsonString;
+            foreach (DataRow item in datatable.Tables[0].Rows)
+            {
+                Console.WriteLine(item["BOOK_NAME"].ToString() + " " + item["BOOK_AUTHOR"].ToString() 
+                          + " " + item["BOOK_TRANSLATER"].ToString() + " " + item["BOOK_REPRE"].ToString() 
+                          + " " + item["BOOK_PUBLISHER"].ToString() + " " + item["ISBN"].ToString() + " " 
+                                + item["BOOK_COLLECTION_NUMBER"].ToString() + " " + item["BOOK_TEXT"].ToString() + " " 
+                                + item["BOOK_AUTHORABOUT"].ToString());
+                result += item["BOOK_NAME"].ToString() + " " + item["BOOK_AUTHOR"].ToString()
+                          + " " + item["BOOK_TRANSLATER"].ToString() + " " + item["BOOK_REPRE"].ToString()
+                          + " " + item["BOOK_PUBLISHER"].ToString() + " " + item["ISBN"].ToString() + " "
+                                + item["BOOK_COLLECTION_NUMBER"].ToString() + " " + item["BOOK_TEXT"].ToString() + " "
+                                + item["BOOK_AUTHORABOUT"].ToString() + ",\n";
+            }
+            return result;
 
         }
 
@@ -54,23 +64,20 @@ namespace LIB.Controllers
             List<OracleParameter> oracleParameters = new List<OracleParameter>();
             oracleParameters.Add(new OracleParameter(":isbn", isbn));
             var datatable = DbHelperOra.Query(sqlstr, oracleParameters.ToArray());
-            string JsonString = string.Empty;
-            JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
-            return JsonString;
-
-        }
-
-        [HttpPost]
-        public string GETBOOKRERATEbyNAME(String bookname)
-        {
-            string result = "";
-            string sqlstr = "select RATE from MY_BOOKINFO where BOOK_NAME=:bookname";
-            List<OracleParameter> oracleParameters = new List<OracleParameter>();
-            oracleParameters.Add(new OracleParameter(":bookname", bookname));
-            var datatable = DbHelperOra.Query(sqlstr, oracleParameters.ToArray());
-            string JsonString = string.Empty;
-            JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
-            return JsonString;
+            foreach (DataRow item in datatable.Tables[0].Rows)
+            {
+                Console.WriteLine(item["BOOK_NAME"].ToString() + " " + item["BOOK_AUTHOR"].ToString()
+                          + " " + item["BOOK_TRANSLATER"].ToString() + " " + item["BOOK_REPRE"].ToString()
+                          + " " + item["BOOK_PUBLISHER"].ToString() + " " + item["ISBN"].ToString() + " "
+                                + item["BOOK_COLLECTION_NUMBER"].ToString() + " " + item["BOOK_TEXT"].ToString() + " "
+                                + item["BOOK_AUTHORABOUT"].ToString());
+                result += item["BOOK_NAME"].ToString() + " " + item["BOOK_AUTHOR"].ToString()
+                          + " " + item["BOOK_TRANSLATER"].ToString() + " " + item["BOOK_REPRE"].ToString()
+                          + " " + item["BOOK_PUBLISHER"].ToString() + " " + item["ISBN"].ToString() + " "
+                                + item["BOOK_COLLECTION_NUMBER"].ToString() + " " + item["BOOK_TEXT"].ToString() + " "
+                                + item["BOOK_AUTHORABOUT"].ToString() + ",\n";
+            }
+            return result;
 
         }
     }

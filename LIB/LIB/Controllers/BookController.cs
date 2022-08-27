@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
 
@@ -12,9 +11,7 @@ namespace LIB.Controllers
 
         [HttpPost]
         public bool INSERTBOOK(String rate, String bookname, String isbn, String book_damage)
-        {
-     
-      
+        {    
             Random rad = new Random();
             int id = rad.Next(10, 1000000);
             string sqlstr = "select BOOK_ID from MY_BOOKS where BOOK_ID=" + id;
@@ -65,9 +62,11 @@ namespace LIB.Controllers
         public string query()
         {
             var datatable = DbHelperOra.Query("select * from MY_BOOKS");
-            string JsonString = string.Empty;
-            JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
-            return JsonString;
+            foreach (DataRow item in datatable.Tables[0].Rows)
+            {
+                Console.WriteLine(item["BOOK_NAME"].ToString() + "___" + item["ISBN"].ToString() + "___" + item["BOOK_ID"].ToString());
+            }
+            return datatable.Tables[0].Rows.ToString();
         }
 
         [HttpPost]
@@ -76,9 +75,12 @@ namespace LIB.Controllers
             string result = "";
             string sqlstr = "select * from MY_BOOKS";
             var datatable = DbHelperOra.Query(sqlstr);
-            string JsonString = string.Empty;
-            JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
-            return JsonString;
+            foreach (DataRow item in datatable.Tables[0].Rows)
+            {
+                Console.WriteLine(item["BOOK_NAME"].ToString() + "___" + item["ISBN"].ToString() + "___" + item["BOOK_ID"].ToString());
+                result += item["BOOK_NAME"].ToString() + "___" + item["ISBN"].ToString() + "___" + item["BOOK_ID"].ToString() + ",";
+            }
+            return result;
         }
     }
 }

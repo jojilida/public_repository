@@ -1,18 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
-using System.Reflection;
-using Newtonsoft.Json;
 
 namespace LIB.Controllers
 {
     [ApiController]
     [Route("api/[controller]/[action]")]
     public class UserController : Controller
-
     {
         [HttpPost]
         public ActionResult postest(String username, String password)
+
         {
             if (String.IsNullOrEmpty(username))
             {
@@ -304,29 +302,28 @@ namespace LIB.Controllers
         public string getlib()
         {
             string result = "";
-            DataSet datatable = new DataSet();
-            datatable = DbHelperOra.Query("select * from MY_USER");
-
-            //foreach (DataRow item in datatable.Tables[0].Rows)
-            //{
-            //    Console.WriteLine(item["USER_NAME"].ToString() + "___" + item["USER_ID"].ToString());
-            //    result += item["USER_NAME"].ToString() + "___" + item["USER_ID"].ToString() + ",";
-            //}
-            //string jsonString = "{";
-            //foreach (DataRow item in datatable.Tables[0].Rows)
-            //{
-            //    jsonString += "\"" + item.RowName + "\":" + Json(table) + ",";
-            //}
-            //jsonString = jsonString.TrimEnd(',');
-
-            //return jsonString + "}";
-            string JsonString = string.Empty;
-            JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
-            return JsonString;
-
+            var datatable = DbHelperOra.Query("select * from MY_USER");
+            foreach (DataRow item in datatable.Tables[0].Rows)
+            {
+                Console.WriteLine(item["USER_NAME"].ToString() + "___" + item["USER_ID"].ToString());
+                result += item["USER_NAME"].ToString() + "___" + item["USER_ID"].ToString() + ",";
+            }
+            return result;
         }
-
-
-
+        [HttpGet]
+        public string get_detailed_info(string userid)
+        {
+            string result = "";
+            var datatable = DbHelperOra.Query("select * from MY_USER where USER_ID="+userid);
+            foreach (DataRow item in datatable.Tables[0].Rows)
+            {
+                result += item["USER_NAME"].ToString() + "," + item["USER_ID"].ToString() + "," + item["AGE"].ToString() + "," + item["SEX"].ToString() + "," + item["NICK_NAME"].ToString() + "," + item["USER_MAIL"].ToString() + ",";
+                var data2 = DbHelperOra.ExecuteSql("select * from MY_LOAN_BOOKS where LOAN_PEOPLE=" + userid);
+                result += data2.ToString()+",";
+                var data3 = DbHelperOra.ExecuteSql("select * from MY_ROOM_APPOINTMENT where USER_ID=" + userid);
+                result += data3.ToString() + ";\n";
+            }
+            return result;
+        }
     }
 }

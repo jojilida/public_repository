@@ -9,28 +9,37 @@ namespace LIB.Controllers
     public class BookNeededController : Controller
     {
         [HttpPost]
-        public bool INSERTBOOKneedINFO(String bookname, String author, String translater, String repre, String publisher, String isbn, String booknumber, String booktext, String authorabout)
+        public bool insert_book_needed(String bookname, String isbn, int num, int ID)
         {
-
-
-            var strinsertinto = "insert into MY_BOOKINFO (BOOK_NAME,BOOK_AUTHOR,BOOK_TRANSLATER,BOOK_REPRE,BOOK_PUBLISHER,ISBN,BOOK_COLLECTION_NUMBER,BOOK_TEXT,BOOK_AUTHORABOUT) " +
-                                "values (:bookname,:author,:translater,:repre,:publisher,:isbn,:booknumber,:booktext,:authorabout)";
-            List<OracleParameter> oracleParameters = new List<OracleParameter>();
-            oracleParameters.Add(new OracleParameter(":bookname", bookname));
-            oracleParameters.Add(new OracleParameter(":author", author));
-            oracleParameters.Add(new OracleParameter(":translater", translater));
-            oracleParameters.Add(new OracleParameter(":repre", repre));
-            oracleParameters.Add(new OracleParameter(":publisher", publisher));
-            oracleParameters.Add(new OracleParameter(":isbne", isbn));
-            oracleParameters.Add(new OracleParameter(":booknumber", booknumber));
-            oracleParameters.Add(new OracleParameter(":booktext", booktext));
-            oracleParameters.Add(new OracleParameter(":authorabout", authorabout));
-
-            DbHelperOra.ExecuteSql(strinsertinto, oracleParameters.ToArray());
-            return true;
-
+            //string sqlstr = "select BOOK_NAME from MY_BOOKS where ISBN=" + isbn;
+            //var datatable = DbHelperOra.Query(sqlstr);
+            //DataRow item = datatable.Tables[0].Rows;
+            //int judege1 = (bookname == item["BOOK_NAME"].ToString());
+            //if (!judge1)
+            //{
+                var strinsertinto = "insert into MY_BOOK_NEEDED (BOOK_NAME,ISBN,NEED_NUMS,NEED_ID) values (:bookname,:isbn,:num,:id)";
+                List<OracleParameter> oracleParameters = new List<OracleParameter>();
+                oracleParameters.Add(new OracleParameter(":bookname", bookname));
+                oracleParameters.Add(new OracleParameter(":isbn", isbn));
+                oracleParameters.Add(new OracleParameter(":num", num));
+                oracleParameters.Add(new OracleParameter(":id", ID));
+                DbHelperOra.ExecuteSql(strinsertinto, oracleParameters.ToArray());
+                return true;
+            //}
+            return false;
         }
 
-        
+        [HttpGet]
+        public string get_needed_list()
+        {
+            string result = "";
+            var datatable = DbHelperOra.Query("select * from MY_BOOK_NEEDED");
+            foreach (DataRow item in datatable.Tables[0].Rows)
+            {
+                result += item["BOOK_NAME"].ToString() + "," + item["ISBN"].ToString() + "," + item["NEED_NUMS"].ToString() + "," + item["NEED_ID"].ToString() + ";\n";
+            }
+            return result;
+        }
     }
+
 }

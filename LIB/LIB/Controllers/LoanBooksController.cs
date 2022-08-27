@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
 
@@ -15,9 +14,22 @@ namespace LIB.Controllers
         {
             string result = "";
             var datatable = DbHelperOra.Query("select * from MY_LOAN_BOOKS where LOAN_PEOPLE="+userid);
-            string JsonString = string.Empty;
-            JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
-            return JsonString;
+            foreach (DataRow item in datatable.Tables[0].Rows)
+            {
+                result += item["BOOK_NAME"].ToString() + "," + item["ISBN"].ToString() + "," + item["BOOK_ID"].ToString() + "," + item["LOAN_TIME"].ToString();
+                //var data2 = DbHelperOra.Query("select * from MY_BOOK_BACK where BACK_PEOPLE=" + userid+" and ISBN="+ item["ISBN"].ToString());
+                var data2 = DbHelperOra.Query("select STATE from MY_BOOKS where BOOK_ID=" + item["BOOK_ID"].ToString());
+                if (data2 != null)
+                {
+                    result += ",yes";
+                }
+                else
+                {
+                    result += ",no";
+                }
+                result+="/n";
+            }
+            return result;
         }
     }
 }

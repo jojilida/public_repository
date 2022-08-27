@@ -2,15 +2,6 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "Json.Net/1.0.33": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Json.Net.dll": {}
-        },
-        "runtime": {
-          "lib/netstandard2.0/Json.Net.dll": {}
-        }
-      },
       "Microsoft.Extensions.ApiDescription.Server/3.0.0": {
         "type": "package",
         "build": {
@@ -63,19 +54,6 @@
           "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
             "assetType": "runtime",
             "rid": "win"
-          }
-        }
-      },
-      "Newtonsoft.Json/13.0.1": {
-        "type": "package",
-        "compile": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {
-            "related": ".xml"
           }
         }
       },
@@ -422,18 +400,6 @@
     }
   },
   "libraries": {
-    "Json.Net/1.0.33": {
-      "sha512": "5tE+db6BqhRAvITIVBeRsQorLGshPExfm4FmMRvWWAfs4RxeTbFFj2PIEybwmMW0qR30HKkXDYhq0YkDK2Jtxw==",
-      "type": "package",
-      "path": "json.net/1.0.33",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "json.net.1.0.33.nupkg.sha512",
-        "json.net.nuspec",
-        "lib/netstandard2.0/Json.Net.dll"
-      ]
-    },
     "Microsoft.Extensions.ApiDescription.Server/3.0.0": {
       "sha512": "LH4OE/76F6sOCslif7+Xh3fS/wUUrE5ryeXAMcoCnuwOQGT5Smw0p57IgDh/pHgHaGz/e+AmEQb7pRgb++wt0w==",
       "type": "package",
@@ -523,33 +489,6 @@
         "runtimes/win/lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.dll",
         "runtimes/win/lib/netcoreapp3.1/Microsoft.Win32.SystemEvents.xml",
         "useSharedDesignerContext.txt"
-      ]
-    },
-    "Newtonsoft.Json/13.0.1": {
-      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
-      "type": "package",
-      "path": "newtonsoft.json/13.0.1",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.md",
-        "lib/net20/Newtonsoft.Json.dll",
-        "lib/net20/Newtonsoft.Json.xml",
-        "lib/net35/Newtonsoft.Json.dll",
-        "lib/net35/Newtonsoft.Json.xml",
-        "lib/net40/Newtonsoft.Json.dll",
-        "lib/net40/Newtonsoft.Json.xml",
-        "lib/net45/Newtonsoft.Json.dll",
-        "lib/net45/Newtonsoft.Json.xml",
-        "lib/netstandard1.0/Newtonsoft.Json.dll",
-        "lib/netstandard1.0/Newtonsoft.Json.xml",
-        "lib/netstandard1.3/Newtonsoft.Json.dll",
-        "lib/netstandard1.3/Newtonsoft.Json.xml",
-        "lib/netstandard2.0/Newtonsoft.Json.dll",
-        "lib/netstandard2.0/Newtonsoft.Json.xml",
-        "newtonsoft.json.13.0.1.nupkg.sha512",
-        "newtonsoft.json.nuspec",
-        "packageIcon.png"
       ]
     },
     "Oracle.ManagedDataAccess.Core/3.21.70": {
@@ -1015,8 +954,6 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "Json.Net >= 1.0.33",
-      "Newtonsoft.Json >= 13.0.1",
       "Oracle.ManagedDataAccess.Core >= 3.21.70",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
@@ -1029,11 +966,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zhang\\source\\repos\\LIB\\LIB\\LIB.csproj",
+      "projectUniqueName": "C:\\迅雷下载\\public_repository-main\\public_repository-main\\LIB\\LIB\\LIB.csproj",
       "projectName": "LIB",
-      "projectPath": "C:\\Users\\zhang\\source\\repos\\LIB\\LIB\\LIB.csproj",
+      "projectPath": "C:\\迅雷下载\\public_repository-main\\public_repository-main\\LIB\\LIB\\LIB.csproj",
       "packagesPath": "C:\\Users\\zhang\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\zhang\\source\\repos\\LIB\\LIB\\obj\\",
+      "outputPath": "C:\\迅雷下载\\public_repository-main\\public_repository-main\\LIB\\LIB\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
@@ -1068,14 +1005,6 @@
       "net6.0": {
         "targetAlias": "net6.0",
         "dependencies": {
-          "Json.Net": {
-            "target": "Package",
-            "version": "[1.0.33, )"
-          },
-          "Newtonsoft.Json": {
-            "target": "Package",
-            "version": "[13.0.1, )"
-          },
           "Oracle.ManagedDataAccess.Core": {
             "target": "Package",
             "version": "[3.21.70, )"

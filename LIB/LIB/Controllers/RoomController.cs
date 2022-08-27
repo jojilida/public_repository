@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
 
@@ -58,10 +57,11 @@ namespace LIB.Controllers
         {
             string result = "";
             var datatable = DbHelperOra.Query("select * from MY_SEMINAR_ROOM");
-            string JsonString = string.Empty;
-            JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
-            return JsonString;
-
+            foreach (DataRow item in datatable.Tables[0].Rows)
+            {
+                result += item["CAPICITY"].ToString() + "___" + item["ROOM_NUMBER"].ToString() + ",";
+            }
+            return result;
         }
 
         //这个用来实现查询
@@ -70,10 +70,11 @@ namespace LIB.Controllers
         {
             string result = "";
             var datatable = DbHelperOra.Query("select * from MY_ROOM_APPOINTMENT");
-            string JsonString = string.Empty;
-            JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
-            return JsonString;
-
+            foreach (DataRow item in datatable.Tables[0].Rows)
+            {
+                result += item["R_ROOM_ID"].ToString() +  item["RESERVE"].ToString() + item["ROOM_NUMBER"].ToString() + ",";
+            }
+            return result;
         }
 
 
