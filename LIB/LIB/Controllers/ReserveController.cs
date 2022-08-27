@@ -40,18 +40,17 @@ namespace LIB.Controllers
             return false;
         }
 
-        [HttpGet]
-        public string GetMyReservation(String userid)
-        {
-            string result = "";
-            DataSet datatable = new DataSet();
-            //datatable = DbHelperOra.Query("select * from MY_SEAT_APPOINTMENT where STATE=0 and USER_ID=" + userid);
-            datatable = DbHelperOra.Query("select * from MY_SEAT_APPOINTMENT where USER_ID=" + userid);
-            string JsonString = string.Empty;
-            JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
-            return JsonString;
-
-        }
+        //[HttpGet]
+        //public string GetMyReservation(String userid)
+        //{
+        //    string result = "";
+        //    DataSet datatable = new DataSet();
+        //    //datatable = DbHelperOra.Query("select * from MY_SEAT_APPOINTMENT where STATE=0 and USER_ID=" + userid);
+        //    datatable = DbHelperOra.Query("select * from MY_SEAT_APPOINTMENT USER_ID=" + userid);
+        //    string JsonString = string.Empty;
+        //    JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
+        //    return JsonString;
+        //}
 
         [HttpPost]
         public bool EndReserve(String userid)
