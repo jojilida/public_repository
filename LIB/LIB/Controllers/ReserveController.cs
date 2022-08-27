@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
@@ -14,7 +14,7 @@ namespace LIB.Controllers
         {
             string sqlstr = "select * from MY_SEAT_APPOINTMENT where STATE=0 and USER_ID=" + userid;
             var data = DbHelperOra.Query("select * from MY_SEAT_APPOINTMENT");
-            int id=data.Tables[0].Rows.Count+1;
+            int id = data.Tables[0].Rows.Count + 1;
             ////var id = DbHelperOra.Query("select * from MY_SEAT_APPOINTMENT");
             ////string JsonString = string.Empty;
             ////JsonString = JsonConvert.SerializeObject(id.Tables[0]);
@@ -22,13 +22,18 @@ namespace LIB.Controllers
             var judge1 = DbHelperOra.Exists(sqlstr);
             if (!judge1)
             {
-                var strinsertinto = "insert into MY_SEAT_APPOINTMENT (R_SEAT_ID,STATE,USER_ID) values (:rseatid,:state,:userid)";
+                var strinsertinto = "insert into MY_SEAT_APPOINTMENT (R_SEAT_ID,STATE,USER_ID,TIME,DAY) values (:rseatid,:state,:userid,:time,:day)";
                 List<OracleParameter> oracleParameters = new List<OracleParameter>();
                 oracleParameters.Add(new OracleParameter(":rseatid", id.ToString()));
                 //oracleParameters.Add(new OracleParameter(":rseatid", (1).ToString()));
                 int i = 0;
                 oracleParameters.Add(new OracleParameter(":state", i));
                 oracleParameters.Add(new OracleParameter(":userid", userid));
+                string time, day;
+                time = DateTime.Now.ToLongTimeString().ToString();
+                day = DateTime.Now.ToShortDateString().ToString();
+                oracleParameters.Add(new OracleParameter(":time", time));
+                oracleParameters.Add(new OracleParameter(":day", day));
                 DbHelperOra.ExecuteSql(strinsertinto, oracleParameters.ToArray());
                 return true;
             }
