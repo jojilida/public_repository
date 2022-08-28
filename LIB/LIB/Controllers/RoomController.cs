@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
 
+
 namespace LIB.Controllers
 {
     [ApiController]
@@ -15,7 +16,7 @@ namespace LIB.Controllers
             string result = "";
             DataSet datatable = new DataSet();
             //datatable = DbHelperOra.Query("select ROOM_TYPE,ROOM_NUMBER,RESERVE_TIME,RESERVE_ID from MY_SEAT_APPOINTMENT where STATE=0 and USER_ID=" + userid);
-            datatable = DbHelperOra.Query("select ROOM_TYPE,ROOM_NUMBER,RESERVE_TIME,RESERVE_ID from MY_ROOM_APPOINTMENT where USER_ID=" + userid);
+            datatable = DbHelperOra.Query("select ROOM_TYPE,ROOM_NUMBER,RESERVE_DATE,RESERVE_TIME,RESERVE_ID from MY_ROOM_APPOINTMENT where USER_ID=" + userid);
             string JsonString = string.Empty;
             JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
             return JsonString;
@@ -35,7 +36,7 @@ namespace LIB.Controllers
             return JsonString;
         }
 
-        [HttpGet]
+        [HttpPost]
         public bool ReserveRoom(string userid, string reserve_id)
         {
             string sqlstr = "select * from MY_ROOM_APPOINTMENT where RESERVE_ID like \'" + reserve_id+"\' and ROOM_MODE like \'未预约\'";
@@ -53,7 +54,7 @@ namespace LIB.Controllers
             return false;
         }
 
-        [HttpGet]
+        [HttpPost]
         public bool CancelRoomReserve(string reserve_id)
         {
             string sqlstr = "select * from MY_ROOM_APPOINTMENT where RESERVE_ID like \'" + reserve_id + "\' and ROOM_MODE like \'已预约\'";
@@ -68,6 +69,38 @@ namespace LIB.Controllers
             }
             return false;
         }
+
+        [HttpPost]
+        public bool new_reservation_list(string date)
+        {
+            var str = "delete from MY_ROOM_APPOINTMENT where RESERVE_DATE=\'" + date + "\'";
+            List<OracleParameter> oracleParameters = new List<OracleParameter>();
+            var isok = DbHelperOra.ExecuteSql(str, oracleParameters.ToArray());
+            Console.WriteLine(isok);
+            var data = DbHelperOra.Query("select * from MY_ROOM_APPOINTMENT");
+            int reserve_id = data.Tables[0].Rows.Count;
+            data = DbHelperOra.Query("select * from MY_ROOM_APPOINTMENT where RESERVE_DATE like '08-26'");
+            foreach (DataRow item in data.Tables[0].Rows)
+            {
+                string strinsertinto2 = "insert into MY_ROOM_APPOINTMENT(RESERVE_ID,RESERVE_DATE,ROOM_NUMBER,ROOM_TYPE,RESERVE_TIME) values (:reserve_id,:reserve_date,:room_num,:room_type,:reserve_time)";
+                //string strinsertinto2 = "insert into MY_ROOM_APPOINTMENT(RESERVE_ID,RESERVE_DATE,ROOM_NUMBER,ROOM_TYPE,RESERVE_TIME,ROOM_MODE) values (:reserve_id,:reserve_date,:room_num,:room_type,:reserve_time,:mode)";
+                List<OracleParameter> oracleParameters2 = new List<OracleParameter>();
+                reserve_id++;
+                oracleParameters2.Add(new OracleParameter(":reserve_id", reserve_id));
+                oracleParameters2.Add(new OracleParameter(":reserve_date", date));
+                oracleParameters2.Add(new OracleParameter(":room_num", item["ROOM_NUMBER"].ToString()));
+                oracleParameters2.Add(new OracleParameter(":room_type", item["ROOM_TYPE"].ToString()));
+                oracleParameters2.Add(new OracleParameter(":reserve_time", item["RESERVE_TIME"].ToString()));
+                //oracleParameters2.Add(new OracleParameter(":mode", item["ROOM_MODE"].ToString()));
+                var isok2 = DbHelperOra.ExecuteSql(strinsertinto2, oracleParameters2.ToArray());
+                Console.WriteLine(isok2);
+                //Console.WriteLine(item["USER_NAME"].ToString() + "___" + item["USER_ID"].ToString());
+                //result += item["USER_NAME"].ToString() + "___" + item["USER_ID"].ToString() + ",";
+            }
+            return true;
+        }
+
+
         //[HttpPost]
         //public bool INSERTROOMAPPOINTMENT(String userid, String reserve, String room_number)
         //{
