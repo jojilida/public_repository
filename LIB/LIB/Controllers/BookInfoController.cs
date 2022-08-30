@@ -13,8 +13,8 @@ namespace LIB.Controllers
         [HttpPost]
         public bool INSERTBOOKINFO(String bookname, String author, String translater, String repre, String publisher, String isbn, String booknumber, String booktext, String authorabout, String book_img, String author_img, String place)
         {
-            var strinsertinto = "insert into MY_BOOKINFO (BOOK_NAME,BOOK_AUTHOR,BOOK_TRANSLATER,BOOK_REPRE,BOOK_PUBLISHER,ISBN,BOOK_COLLECTION_NUMBER,BOOK_TEXT,BOOK_AUTHORABOUT,BOOK_IMG,AUTHOR_IMG,PLACE,UPDATE_DATE) " +
-                                "values (:bookname,:author,:translater,:repre,:publisher,:isbn,:booknumber,:booktext,:authorabout,:book_img,:author_img,:place,to_date(:update_date,'yyyy-mm-dd'))";
+            var strinsertinto = "insert into MY_BOOKINFO (BOOK_NAME,BOOK_AUTHOR,BOOK_TRANSLATER,BOOK_REPRE,BOOK_PUBLISHER,ISBN,BOOK_COLLECTION_NUMBER,BOOK_TEXT,BOOK_AUTHORABOUT,BOOK_IMG,AUTHOR_IMG,RATE_PEOPLE_NUMBER,RATE,PLACE,UPDATE_DATE) " +
+                                "values (:bookname,:author,:translater,:repre,:publisher,:isbn,:booknumber,:booktext,:authorabout,:book_img,:author_img,'0',0,:place,to_date(:update_date,'yyyy-mm-dd'))";
             List<OracleParameter> oracleParameters = new List<OracleParameter>();
             oracleParameters.Add(new OracleParameter(":bookname", bookname));
             oracleParameters.Add(new OracleParameter(":author", author));
