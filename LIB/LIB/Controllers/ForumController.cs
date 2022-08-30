@@ -10,7 +10,7 @@ namespace LIB.Controllers
     public class ForumController : Controller
     {
         [HttpPost]
-        public bool enterForum(String userid,String content,String topic)
+        public bool enterForum(String userid,String content,String topic,String time)
         {
             ////string sqlstr = "select * from MY_FORUM where USER_ID=" + userid;
             var data = DbHelperOra.Query("select * from  MY_FORUM");
@@ -19,7 +19,7 @@ namespace LIB.Controllers
             ////string JsonString = string.Empty;
             ////JsonString = JsonConvert.SerializeObject(id.Tables[0]);
             ////return JsonString;
-            var strinsertinto = "insert into MY_FORUM (CONTENTS_ID,FORUM_CONTENT,USER_ID,TOPIC,FORUM_BACK,COMMENTS_TIME) values (:contentid,:content,:userid,:topic,:forumbavk,2022-08-28)";
+            var strinsertinto = "insert into MY_FORUM (CONTENTS_ID,FORUM_CONTENT,USER_ID,TOPIC,FORUM_BACK,COMMENTS_TIME) values (:contentid,:content,:userid,:topic,:forumbavk,:time)";
             List<OracleParameter> oracleParameters = new List<OracleParameter>();
             oracleParameters.Add(new OracleParameter(":contentid", id.ToString()));
             //oracleParameters.Add(new OracleParameter(":rseatid", (1).ToString()));
@@ -27,6 +27,7 @@ namespace LIB.Controllers
             oracleParameters.Add(new OracleParameter(":userid", userid));
             oracleParameters.Add(new OracleParameter(":topic", topic));
             oracleParameters.Add(new OracleParameter(":forumbavk", userid));
+            oracleParameters.Add(new OracleParameter(":time", time));
             DbHelperOra.ExecuteSql(strinsertinto, oracleParameters.ToArray());
             return true;
         }
