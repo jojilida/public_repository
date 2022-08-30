@@ -1,4 +1,4 @@
-﻿using LIB.Models;
+using LIB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Oracle.ManagedDataAccess.Client;
@@ -13,8 +13,6 @@ namespace LIB.Controllers
         [HttpPost]
         public bool INSERTBOOKINFO(String bookname, String author, String translater, String repre, String publisher, String isbn, String booknumber, String booktext, String authorabout, String book_img, String author_img, String place)
         {
-
-
             var strinsertinto = "insert into MY_BOOKINFO (BOOK_NAME,BOOK_AUTHOR,BOOK_TRANSLATER,BOOK_REPRE,BOOK_PUBLISHER,ISBN,BOOK_COLLECTION_NUMBER,BOOK_TEXT,BOOK_AUTHORABOUT,BOOK_IMG,AUTHOR_IMG,PLACE,UPDATE_DATE) " +
                                 "values (:bookname,:author,:translater,:repre,:publisher,:isbn,:booknumber,:booktext,:authorabout,:book_img,:author_img,:place,to_date(:update_date,'yyyy-mm-dd'))";
             List<OracleParameter> oracleParameters = new List<OracleParameter>();
@@ -27,15 +25,50 @@ namespace LIB.Controllers
             oracleParameters.Add(new OracleParameter(":booknumber", booknumber));
             oracleParameters.Add(new OracleParameter(":booktext", booktext));
             oracleParameters.Add(new OracleParameter(":authorabout", authorabout));
-            oracleParameters.Add(new OracleParameter(":booktext", booktext));
-            oracleParameters.Add(new OracleParameter(":authorabout", authorabout));
+            oracleParameters.Add(new OracleParameter(":book_img", book_img));
+            oracleParameters.Add(new OracleParameter(":author_img", author_img));
             oracleParameters.Add(new OracleParameter(":place", place));
-            oracleParameters.Add(new OracleParameter(":update_date",DateTime.Now.ToString("yyyy-MM-dd") ));
+            oracleParameters.Add(new OracleParameter(":update_date", DateTime.Now.ToString("yyyy-MM-dd")));
+            DbHelperOra.ExecuteSql(strinsertinto, oracleParameters.ToArray());
 
+            var data = DbHelperOra.Query("select * from MY_BOOKS");
+            int book_id = data.Tables[0].Rows.Count+1;
+
+            var strinsertinto2 = "insert into MY_BOOKS(BOOK_NAME,ISBN,BOOK_ID,BORROWED_TIMES,STATE,BOOK_DAMAGE) values (:book_name,:isbn,:book_id,0,'未预约','0')";
+            List<OracleParameter> oracleParameters2 = new List<OracleParameter>();
+            oracleParameters2.Add(new OracleParameter(":book_name", bookname));
+            oracleParameters2.Add(new OracleParameter(":isbn", isbn));
+            oracleParameters2.Add(new OracleParameter(":book_id", book_id));
+            DbHelperOra.ExecuteSql(strinsertinto2, oracleParameters2.ToArray());
+
+            return true;
+        }
+
+        [HttpGet]
+        public string GetBookInfo(String isbn)
+        {
+            DataSet datatable = new DataSet();
+            datatable = DbHelperOra.Query("select * from MY_BOOKINFO where ISBN='" + isbn+"'");
+            string JsonString = string.Empty;
+            JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
+            return JsonString;
+        }
+
+        [HttpPost]
+        public bool UpdateBookInfo(String author, String translater, String repre, String publisher, String isbn, String booknumber, String booktext, String authorabout, String book_img, String author_img, String place)
+        {
+            var strinsertinto = "update MY_BOOKINFO set BOOK_AUTHOR='" + author + "',BOOK_TRANSLATER='" + translater 
+                + "',BOOK_REPRE='" + repre + "',BOOK_PUBLISHER='" + publisher 
+                + "',BOOK_COLLECTION_NUMBER='" + booknumber + "',BOOK_TEXT='" 
+                + booktext + "',BOOK_AUTHORABOUT='" + authorabout + "',BOOK_IMG='" 
+                + book_img + "',AUTHOR_IMG='" + author_img + "',PLACE='" + place 
+                + "',UPDATE_DATE='" + DateTime.Now.ToString("yyyy-MM-dd") 
+                + "' where ISBN='"+isbn+"'";
+            List<OracleParameter> oracleParameters = new List<OracleParameter>();
             DbHelperOra.ExecuteSql(strinsertinto, oracleParameters.ToArray());
             return true;
-
         }
+
 
         [HttpPost]
         public string GETBOOKINFObyNAME(String bookname)
