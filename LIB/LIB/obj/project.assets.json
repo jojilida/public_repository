@@ -1029,11 +1029,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\zhang\\source\\repos\\20222-\\LIB\\LIB\\LIB.csproj",
+      "projectUniqueName": "C:\\Users\\zhang\\Desktop\\后端\\public_repository\\LIB\\LIB\\LIB.csproj",
       "projectName": "LIB",
-      "projectPath": "C:\\Users\\zhang\\source\\repos\\20222-\\LIB\\LIB\\LIB.csproj",
+      "projectPath": "C:\\Users\\zhang\\Desktop\\后端\\public_repository\\LIB\\LIB\\LIB.csproj",
       "packagesPath": "C:\\Users\\zhang\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\zhang\\source\\repos\\20222-\\LIB\\LIB\\obj\\",
+      "outputPath": "C:\\Users\\zhang\\Desktop\\后端\\public_repository\\LIB\\LIB\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
