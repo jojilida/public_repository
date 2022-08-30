@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
@@ -28,7 +28,7 @@ namespace LIB.Controllers
         [HttpPost]
         public bool EditNotice(string id, string title, string text)
         {
-            var strinsertinto = "update MY_NOTICE set TITLE=\'"+title+"\',TEXT=\'"+text+"\' where ID like \'" + id + "\'";
+            var strinsertinto = "update MY_NOTICE set TITLE=\'" + title + "\',TEXT=\'" + text + "\' where ID like \'" + id + "\'";
             List<OracleParameter> oracleParameters = new List<OracleParameter>();
             var isok = DbHelperOra.ExecuteSql(strinsertinto, oracleParameters.ToArray());
             Console.WriteLine(isok);

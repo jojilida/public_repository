@@ -67,52 +67,52 @@ namespace LIB.Controllers
             return false;
         }
 
-            //    [HttpPost]
-            //    public bool INSERTROOM(String capicity, String room_number)
-            //    {
+        //    [HttpPost]
+        //    public bool INSERTROOM(String capicity, String room_number)
+        //    {
 
-            //        string sqlstr = "select ROOM_NUMBER from MY_SEMINAR_ROOM where ROOM_NUMBER=" + room_number;
-            //        var judge1 = DbHelperOra.Exists(sqlstr);
-            //        if (!judge1)
-            //        {
+        //        string sqlstr = "select ROOM_NUMBER from MY_SEMINAR_ROOM where ROOM_NUMBER=" + room_number;
+        //        var judge1 = DbHelperOra.Exists(sqlstr);
+        //        if (!judge1)
+        //        {
 
-            //            var strinsertinto = "insert into MY_SEMINAR_ROOM (CAPICITY,ROOM_NUMBER) values (:room_number,:capicity)";
-            //            List<OracleParameter> oracleParameters = new List<OracleParameter>();
-            //            oracleParameters.Add(new OracleParameter(":capicity", capicity));
-            //            oracleParameters.Add(new OracleParameter(":room_number", room_number));
-            //            DbHelperOra.ExecuteSql(strinsertinto, oracleParameters.ToArray());
-            //            return true;
-            //        }
-            //        return false;
+        //            var strinsertinto = "insert into MY_SEMINAR_ROOM (CAPICITY,ROOM_NUMBER) values (:room_number,:capicity)";
+        //            List<OracleParameter> oracleParameters = new List<OracleParameter>();
+        //            oracleParameters.Add(new OracleParameter(":capicity", capicity));
+        //            oracleParameters.Add(new OracleParameter(":room_number", room_number));
+        //            DbHelperOra.ExecuteSql(strinsertinto, oracleParameters.ToArray());
+        //            return true;
+        //        }
+        //        return false;
 
-            //    }
+        //    }
 
-            //    //这个用来实现查询
-            //    [HttpGet]
-            //    public string getroom()
-            //    {
-            //        string result = "";
-            //        var datatable = DbHelperOra.Query("select * from MY_SEMINAR_ROOM");
-            //        string JsonString = string.Empty;
-            //        JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
-            //        return JsonString;
+        //    //这个用来实现查询
+        //    [HttpGet]
+        //    public string getroom()
+        //    {
+        //        string result = "";
+        //        var datatable = DbHelperOra.Query("select * from MY_SEMINAR_ROOM");
+        //        string JsonString = string.Empty;
+        //        JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
+        //        return JsonString;
 
-            //    }
+        //    }
 
-            //    //这个用来实现查询
-            //    [HttpGet]
-            //    public string getroomapp()
-            //    {
-            //        string result = "";
-            //        var datatable = DbHelperOra.Query("select * from MY_ROOM_APPOINTMENT");
-            //        string JsonString = string.Empty;
-            //        JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
-            //        return JsonString;
+        //    //这个用来实现查询
+        //    [HttpGet]
+        //    public string getroomapp()
+        //    {
+        //        string result = "";
+        //        var datatable = DbHelperOra.Query("select * from MY_ROOM_APPOINTMENT");
+        //        string JsonString = string.Empty;
+        //        JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
+        //        return JsonString;
 
-            //    }
+        //    }
 
 
-        }
+    }
 
 
 }

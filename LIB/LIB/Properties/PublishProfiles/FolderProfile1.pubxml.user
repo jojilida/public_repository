@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\zhang\source\repos\public_repository\LIB\LIB\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2022-08-30T07:14:41.7292621Z;True|2022-08-30T14:58:41.4707904+08:00;True|2022-08-30T14:56:09.8632464+08:00;True|2022-08-30T00:01:32.9806389+08:00;True|2022-08-30T00:01:15.2196415+08:00;True|2022-08-29T09:03:26.1585707+08:00;True|2022-08-28T20:17:50.9975890+08:00;True|2022-08-27T21:25:08.7314067+08:00;True|2022-08-27T20:09:12.9651727+08:00;True|2022-08-27T17:19:25.4457162+08:00;True|2022-08-27T17:08:01.9338395+08:00;True|2022-08-27T16:27:44.1653682+08:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>

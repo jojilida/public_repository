@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Oracle.ManagedDataAccess.Client;
 using System.Data;
@@ -28,7 +28,7 @@ namespace LIB.Controllers
             string sqlstr = "";
             DataSet datatable = new DataSet();
             //sqlstr = "select ROOM_TYPE,ROOM_NUMBER,RESERVE_TIME,ROOM_MODE,RESERVE_ID from MY_ROOM_APPOINTMENT";
-            sqlstr = "select ROOM_TYPE,ROOM_NUMBER,RESERVE_TIME,ROOM_MODE,RESERVE_ID from MY_ROOM_APPOINTMENT where ROOM_TYPE like \'" + type + "\' and RESERVE_DATE like \'" + date+'\'';
+            sqlstr = "select ROOM_TYPE,ROOM_NUMBER,RESERVE_TIME,ROOM_MODE,RESERVE_ID from MY_ROOM_APPOINTMENT where ROOM_TYPE like \'" + type + "\' and RESERVE_DATE like \'" + date + '\'';
             //datatable = DbHelperOra.Query("select * from MY_SEAT_APPOINTMENT where STATE=0 and USER_ID=" + userid);
             datatable = DbHelperOra.Query(sqlstr);
             string JsonString = string.Empty;
@@ -39,7 +39,7 @@ namespace LIB.Controllers
         [HttpPost]
         public bool ReserveRoom(string userid, string reserve_id)
         {
-            string sqlstr = "select * from MY_ROOM_APPOINTMENT where RESERVE_ID like \'" + reserve_id+"\' and ROOM_MODE like \'未预约\'";
+            string sqlstr = "select * from MY_ROOM_APPOINTMENT where RESERVE_ID like \'" + reserve_id + "\' and ROOM_MODE like \'未预约\'";
             //string sqlstr = "select * from MY_ROOM_APPOINTMENT where RESERVE_ID like \'" + reserve_id + "\'";
             var judge1 = DbHelperOra.Exists(sqlstr);
             if (judge1)

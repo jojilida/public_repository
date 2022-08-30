@@ -275,14 +275,13 @@ namespace LIB.Controllers
 
         //这个用来实现查询
         [HttpPost]
-        public ActionResult query()
+        public string query()
         {
             var datatable = DbHelperOra.Query("select * from MY_USER");
-            foreach (DataRow item in datatable.Tables[0].Rows)
-            {
-                Console.WriteLine(item["USER_NAME"].ToString() + "___" + item["USER_ID"].ToString() + "___" + item["PASSWORD"].ToString());
-            }
-            return Ok();
+            string JsonString = string.Empty;
+            JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
+            return JsonString;
+
         }
 
         //这个用来实现查询
@@ -291,12 +290,10 @@ namespace LIB.Controllers
         {
             string result="";
             var datatable = DbHelperOra.Query("select * from MY_USER");
-            foreach (DataRow item in datatable.Tables[0].Rows)
-            {
-                Console.WriteLine(item["USER_NAME"].ToString() + "___" + item["USER_ID"].ToString());
-                result += item["USER_NAME"].ToString() + "___" + item["USER_ID"].ToString()+",";
-            }
-            return result;
+            string JsonString = string.Empty;
+            JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
+            return JsonString;
+
         }
 
         //这个用来实现查询
