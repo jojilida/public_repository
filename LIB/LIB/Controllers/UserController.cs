@@ -303,6 +303,16 @@ namespace LIB.Controllers
 
         }
 
+        [HttpPost]
+        public string GetDamagedBookByUserID(string userid)
+        {
+            string result = "";
+            var datatable = DbHelperOra.Query("select * from MY_DAMAGED_BOOKS where USER_ID='" + userid+"' and DAMAGE_STATE=1");
+            string JsonString = string.Empty;
+            JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
+            return JsonString;
+        }
+
 
 
     }

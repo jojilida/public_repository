@@ -54,6 +54,8 @@ namespace LIB.Controllers
             return JsonString;
         }
 
+
+
         [HttpPost]
         public bool UpdateBookInfo(String author, String translater, String repre, String publisher, String isbn, String booknumber, String booktext, String authorabout, String book_img, String author_img, String place)
         {

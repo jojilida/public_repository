@@ -49,7 +49,7 @@ namespace LIB.Controllers
         public string GetDamagedBook()
         {
             DataSet datatable = new DataSet();
-            datatable = DbHelperOra.Query("select * from MY_DAMAGED_BOOK where DAMAGE_STATE like '1'");
+            datatable = DbHelperOra.Query("select * from MY_DAMAGED_BOOKS where DAMAGE_STATE like '1'");
             string JsonString = string.Empty;
             JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
             return JsonString;
@@ -68,12 +68,12 @@ namespace LIB.Controllers
         [HttpPost]
         public bool RepairBook(string book_id, string damage_time)
         {
-            string sqlstr = "select * from MY_DAMAGED_BOOK where BOOK_ID like \'" + book_id + "\' and DAMAGE_TIME like \'" + damage_time + "\' and DAMAGE_STATE=1";
+            string sqlstr = "select * from MY_DAMAGED_BOOKS where BOOK_ID like \'" + book_id + "\' and DAMAGE_TIME like \'" + damage_time + "\' and DAMAGE_STATE=1";
             var data = DbHelperOra.Query(sqlstr);
             int judge1 = data.Tables[0].Rows.Count;
             if (judge1 > 0)
             {
-                var strinsertinto = "update MY_DAMAGED_BOOK set DAMAGE_STATE=0,REPAIR_TIME=\'" + DateTime.Now.ToString("yyyy-MM-dd") + "\' where BOOK_ID like \'" + book_id + "\' and DAMAGE_TIME like \'" + damage_time + "\' and DAMAGE_STATE=1";
+                var strinsertinto = "update MY_DAMAGED_BOOKS set DAMAGE_STATE=0,REPAIR_TIME=\'" + DateTime.Now.ToString("yyyy-MM-dd") + "\' where BOOK_ID like \'" + book_id + "\' and DAMAGE_TIME like \'" + damage_time + "\' and DAMAGE_STATE=1";
                 List<OracleParameter> oracleParameters = new List<OracleParameter>();
                 var isok = DbHelperOra.ExecuteSql(strinsertinto, oracleParameters.ToArray());
                 Console.WriteLine(isok);
@@ -90,12 +90,12 @@ namespace LIB.Controllers
         [HttpPost]
         public bool AddDamagedBook(string book_id, string user_id = "")
         {
-            string sqlstr = "select * from MY_DAMAGED_BOOK where BOOK_ID like \'" + book_id + "\' and  DAMAGE_STATE=1";
+            string sqlstr = "select * from MY_DAMAGED_BOOKS where BOOK_ID like \'" + book_id + "\' and  DAMAGE_STATE=1";
             var data = DbHelperOra.Query(sqlstr);
             int judge1 = data.Tables[0].Rows.Count;
             if (judge1 == 0)
             {
-                var strinsertinto = "insert into MY_DAMAGED_BOOK(BOOK_NAME,ISBN,BOOK_ID,DAMAGE_STATE,DAMAGE_TIME,USER_ID) values (:book_name,:isbn,:book_id,1,\'" + DateTime.Now.ToString("yyyy-MM-dd") + "\',:user_id)";
+                var strinsertinto = "insert into MY_DAMAGED_BOOKS(BOOK_NAME,ISBN,BOOK_ID,DAMAGE_STATE,DAMAGE_TIME,USER_ID) values (:book_name,:isbn,:book_id,1,\'" + DateTime.Now.ToString("yyyy-MM-dd") + "\',:user_id)";
                 List<OracleParameter> oracleParameters = new List<OracleParameter>();
                 var data2 = DbHelperOra.Query("select BOOK_NAME,ISBN from MY_BOOKS where BOOK_ID like \'" + book_id + "\'");
                 foreach (DataRow item in data2.Tables[0].Rows)
