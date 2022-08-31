@@ -46,7 +46,7 @@ namespace LIB.Controllers
         public string GetDamagedBooks(String userid)
         {
             string result = "";
-            var datatable = DbHelperOra.Query("select * from MY_DAMAGED_BOOKS natural join MY_BOOKINFO where USER_ID='" + userid + "' and DAMAGE_STATE=1");
+            var datatable = DbHelperOra.Query("select * from MY_DAMAGED_BOOKS natural join MY_BOOKINFO where USER_ID='" + userid);
             string JsonString = string.Empty;
             JsonString = JsonConvert.SerializeObject(datatable.Tables[0]);
             return JsonString;
